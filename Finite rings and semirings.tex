@@ -1,0 +1,176 @@
+\documentclass{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+%\newcommand{\bb}{\mathbb}
+%\newcommand{\m}{\mathbf}
+
+\title{Finite rings and semirings}
+\author{Modern Algebra participants }
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+The aim of these notes is to record what is known about finite rings and semirings, and possibly work out some new results about how to enumerate finite rings or characterize their structure.
+For finite rings there is some useful information in OEIS.org with links to several papers and websites:
+
+\href{http://oeis.org/A027623}{A027623} $R(n)=$ number of rings with $n$ elements.
+
+\href{http://oeis.org/A037234}{A037234}  Same as above, but with $a(0) = 0$.
+
+\href{http://oeis.org/A037289}{A037289} $CR(n)=$ number of commutative rings with $n$ elements. 
+
+\href{http://oeis.org/A037291}{A037291} $R_1(n)=$ number of rings with 1 containing $n$ elements. 
+
+\href{http://oeis.org/A127707}{A127707} $CR_1(n)=$ number of commutative rings with $1$ containing $n$ elements. 
+
+\section{Multiplicative functions}
+
+A function $f$ on natural numbers is called \textit{multiplicative} if for all relatively prime $a,b\in\mathbb N$  we have $f(ab)=f(a)f(b)$. Note that with $b=1$ this implies $f(a1)=f(a)f(1)$, so $f(1)=1$, and also $f(p^mq^n)=f(p^m)f(q^n)$ for all distinct primes $p,q$ and all natural numbers $m,n$.
+
+A \textit{prime power} is any number of the form $p^k$ where $p$ is a prime number and $k\in\mathbb N$.
+
+Multiplicative functions are interesting since if  the values of $f$ are known for all prime powers, then $f$ can be calculated for all other values.
+
+The following proof is due to Eric M. Rains (Caltech, Oct 27, 2019, \url{http://oeis.org/A037291/a037291.txt}).
+
+\begin{theorem}
+The number $R(n)$ of rings with $n$ elements, and the number $R_1(n)$ of rings with 1 and with $n$ elements are multiplicative functions of $n$.
+\end{theorem}
+
+There is a natural bijective proof.
+
+First note that any finite abelian group $A$ has a canonical
+decomposition as a product of abelian groups $A_p$ of prime power order,
+in which $A_p$ is the subgroup of $A$ consisting of those elements of order
+a power of $p$.  (This implies multiplicativity of the number of abelian
+groups.)
+
+A similar decomposition applies to finite rings. More precisely, one has the following.
+
+\begin{lemma}  Let $R$ be a finite nonunital ring, and for a prime $p$, let $R_p$
+denote the $p$-power subgroup of the additive group of $R$.  Then $R_p$ is a
+subring, and there is a ring isomorphism from $R$ to $\prod_p R_p$.  Finally,
+if $R$ is unital, then so are those $R_p$ which are nonzero.
+\end{lemma}
+
+\begin{proof}
+By construction, this contains $0$ and is closed under addition
+and negation, so it remains only to show it is closed under
+multiplication, which follows by observing that if $p^k x = 0$ and $p^j y =
+0$, 
+then $p^{k+j} xy = 0$.  Similarly, if $x \in R_p$, $y \in R_q$ for distinct
+primes $p,q$, then $p^k xy = q^m xy = 0$, and thus $xy = 0$.  In particular, the
+direct sum decomposition $R = \bigoplus_p R_p$ as an additive group extends
+to a product decomposition as a ring.
+
+Now suppose $R$ is unital.  Then the direct sum decomposition gives us a unique expression $1 = \sum_p e_p$
+where each $e_p \in R_p$.  For $p,j$ distinct, $e_p e_j = 0$, and thus
+$$1 = 1^2 = \sum_p e_p^2$$
+so that $e_p^2 = e_p$ by uniqueness.  In other words, we have a canonical
+decomposition of $1$ as a sum of orthogonal idempotents, and thus a
+canonical product decomposition into unital rings as desired.
+\end{proof}
+
+From this result we can deduce the number of rings with 100 elements, and the number of rings with 1 that have 100 elements:
+
+$100=2^25^2$ and from OEIS.org we know $R_1(2^2)=R_1(5^2)=4$, hence $R_1(100)=R_1(2^2)R_1(5^2)=16$.
+
+Similarly,  $R(2^2)=R(5^2)=11$, so $R(100)=11^2=121$.
+
+
+For a prime $p$, it is easy to see that there are exactly 2 rings of cardinality $p$: the ring with $0$-multiplication ($xy=0$) and $\mathbb Z_p$.
+
+The structure of rings of cardinality $p^2$ has been described: in general, there are 11 such rings, and 4 of them have an identity 1, and these rings happen to all be commutative. So $CR_1(100)=16$ as well.
+
+The multiplicativity of the functions $R_1$ and $CR_1$ is a consequence of the direct decomposition of finite rings with 1. So to understand  the structure of any finite ring with identity, we only need to describe the structure of rings with prime-power many elements.
+
+For $p^2$ and $p^3$ the structure of all these rings has been characterized, but for higher powers of a prime this becomes difficult, and it seems unlikely that $R(p^4)$ or $R_1(p^4)$ can be calculated in general. A good place to start may be $R_1(3^4)=R_1(81)$.
+
+For now, let's consider the four rings with identity of cardinality $p^2$. When $p=2$, we already know 3 of them:
+
+$\mathbb Z_4$, $\mathbb Z_2\times \mathbb Z_2$ and $\mathbb F_4$ (the finite field with 4 elements, also denoted by $GF(4)$, the Galois field of size 4). They are nonisomorphic since the first one has characteristic 4 while the other two have characteristic 2, and the middle one has zero divisors while the third one is a field.
+
+The last one, let's call it $\mathbb M_4$, is a subring of $M_2(\mathbb Z_2)$: 
+
+$\mathbb M_4=\big\{
+\big(\begin{smallmatrix} 0&0\\0&0\end{smallmatrix}\big),
+\big(\begin{smallmatrix} 1&0\\0&1\end{smallmatrix}\big),
+\big(\begin{smallmatrix} 0&1\\1&0\end{smallmatrix}\big),
+\big(\begin{smallmatrix} 1&1\\1&1\end{smallmatrix}\big)\big\}$ 
+
+We need to observe that $\mathbb M_4$ is not isomorphic to the other 3. This is because it has characteristic 2, but has an element that is it's own zero divisor, while the other two have either 2 or no zero divisors.
+
+The first 3 generalize to larger primes in an obvious way, but how does one define $\mathbb M_{p^2}$?
+
+Looks like $\mathbb M_{p^2}=\big\{\big(\begin{smallmatrix} a&b\\b&a\end{smallmatrix}\big) : a,b\in\mathbb Z_p\big\}$ will work.
+
+%Is it possible to make diagrams for these rings? E.g., $\mathbb Z_{p^2}$ would be a directed cycle of length $p^2$, and $\mathbb Z_p\times\mathbb Z_p$ would be a torus of $p$ directed cycles each of length $p$. But this does not show the multiplication, and what about $\mathbb F_{p^2}$ or  $\mathbb M_{p^2}$?
+
+What if the ring does not have an identity element? Can one give a nice description of the 7 rings of cardinality 4 that show up in this case (11 rings total)? They are not all commutative, so a description by matrices should be explored.
+
+Does every subring of a finite ring with 1 also have an identity $e$ (not necessarily 1)?
+
+If these questions can be answered, then the answers are likely already known since rings have been studied for over 100 years. However, a similar approach to questions about (certain) finite semirings is quite likely to yield new results.
+
+\section{The 11 rings of size $p^2$ }
+
+We first try to understand all rings with 4 elements. There are 11 such rings, and 4 of them we already know. The other 7 we can find with Prover9/Mace4 and then try to generalize them to rings of size $p^2$. Or you can of course try to find this information online somewhere (but does it exist?).
+
+We should put the tables for these rings here and find good ways to describe them.
+
+
+
+
+
+\section{Semimeadows, semirings and semifields}
+
+A \textit{semigroup} $(S,\cdot)$ is a set $S$ with a binary operation $\cdot$ that is associative.
+
+A \textit{monoid} $(M,\cdot, 1)$ is a semigroup $(M,\cdot)$ with an identity element $1$, i. e., $x1=1x=x$.
+
+A monoid or semigroup is \textit{commutative} if $xy=yx$ for all elements $x,y$.
+
+A \textit{semiring} $(S,+,\cdot)$ is a commutative semigroup $(S,+)$ and a semigroup $(S,\cdot)$ such that $x(y+z)=xy+xz$ and $(x+y)z=xz+yz$ for all $x,y,z\in S$.
+
+A semiring is \textit{commutative} if $\cdot$ is commutative.
+
+A semiring has a 1 if it contains a multiplicative identity element, and it has a $0$ if it contains an additive identity element that also satisfies $x0=0x=0$ for all $x\in S$.
+
+A \textit{rig} is a commutative semiring with 0 and 1.
+
+A \textit{semifield} is a rig in which every element $x\ne 0$ has a multiplicative inverse $x^{-1}$.
+
+In this terminology, a \textit{ring} is a semiring with $0$ in which every element $x$ has an additive inverse, denoted by $-x$. A \textit{field} is a semifield that is also a ring.
+
+A \textit{semimeadow} is a ring with a total unary operation $^{-1}$ such that $(x^{-1})^{-1}=x$ and $xx^{-1}x=x$.
+
+A \textit{meadow} is a semimeadow that is also a commutative ring.
+
+\section{Irreducible elements in semirings}
+Let $*$ be a binary operation on a set $S$. 
+An element $x$ is \textit{$*$-reducible} if $x=y*z$ for some $y,z\in S\setminus\{x\}$. 
+An element $x$ is \textit{$*$-irreducible} if the opposite holds: for all $y,z\in S\setminus \{x\}$ we have $x\ne y*z$. 
+(This is not the most general definition, but suffices for now.)
+The concept is interesting since $*$-irreducible elements cannot be generated from other ones using the $*$ operation, so they need to be part of any generating set. 
+
+Note that in a group there are no $*$-irreducible elements since every element has an inverse with respect to $*$.
+
+\section{Fractions in noncommutative rings}
+The field-of-fractions construction shows that any integral domain is isomorphic to a subring of some field. This is an important construction since it replaces a fairly nice algebraic structure by a larger and much nicer algebraic structure. For example in the integers an equation like $2x-1=0$ has no solution, but in the rational numbers it does.
+
+However the field-of-fractions construction makes use of commutativity in numerous places, so it is interesting that there is a generalization of this construction that also works for \textit{domains} (= noncommutative rings with identity and no zero divisors). This construction is based on the Ore condition \url{https://en.wikipedia.org/wiki/Ore_condition}.
+
+Can any of this be done for (noncommutative) semifields? Trevor has posted some information in his discussion post for 18.1.
+
+Another interesting paper is \url{https://arxiv.org/pdf/1709.06923.pdf} Guillaume Tahar, Ordered algebraic structures and classification of semifields.
+
+
+
+\end{document}
